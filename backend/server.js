@@ -31,24 +31,31 @@
 //     console.log(`Server is running on port ${port}`);
 // });
 // backend/server.js
-const express = require('express');
-const cors = require('cors');
+// backend/server.js
+const express = require("express");
+const cors = require("cors");
+
 const app = express();
-const PORT = process.env.PORT || 5001;
 
 // ✅ Middleware
 app.use(cors());
 app.use(express.json());
 
-// ✅ Single route — your PDF analyzer
-app.use('/', require('./test')); // serves as the home route (http://localhost:5001/)
+// ✅ Your routes
+app.use("/analyze-pdf", require("./test")); // PDF analysis route
 
-// ✅ (Optional) Health check route
-app.get('/health', (req, res) => {
-  res.send('✅ PDF Analyzer Backend is running fine.');
+// ✅ Health check route
+app.get("/health", (req, res) => {
+  res.send("✅ PDF Analyzer Backend is running fine.");
 });
 
-// ✅ Start the server
-app.listen(PORT, () => {
-  console.log(` Server running on http://localhost:${PORT}`);
-});
+// ✅ Export for Vercel (do NOT call app.listen here)
+module.exports = app;
+
+// ✅ If running locally (e.g., `node server.js`)
+if (require.main === module) {
+  const PORT = process.env.PORT || 5001;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running locally on http://localhost:${PORT}`);
+  });
+}
