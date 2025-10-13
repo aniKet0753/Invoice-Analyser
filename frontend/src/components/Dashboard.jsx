@@ -1,9 +1,10 @@
 import React from 'react';
 import { Plus, Filter, Download, ChevronDown, MoreHorizontal, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import AIAssistant from './AIAssistant';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DashboardPage = ({ isMobile, isTablet, closePanels }) => {
+    const navigate = useNavigate();
   const statCards = [
     { title: 'Total Leads', value: '247', change: '+12%', arrow: 'up' },
     { title: 'New This Week', value: '32', change: '+8%', arrow: 'up' },
@@ -56,6 +57,15 @@ const DashboardPage = ({ isMobile, isTablet, closePanels }) => {
               <span>Add Lead</span>
             </button>
           </Link>
+          <button
+    onClick={() => navigate("/upload-pdf")}
+    className={`text-slate-400 text-sm flex items-center space-x-2 border border-slate-600 rounded hover:bg-slate-800 whitespace-nowrap ${
+      isMobile ? 'px-2 py-1' : 'px-3 py-2'
+    }`}
+  >
+    <Download size={14} />
+    <span>PDF → Excel</span>
+  </button>
         </div>
       </div>
 
@@ -242,7 +252,7 @@ const DashboardPage = ({ isMobile, isTablet, closePanels }) => {
           </div>
         )}
 
-        <div className="mb-3 flex flex-col md:flex-row md:justify-between md:items-center mt-4 text-sm text-slate-500 space-y-2 md:space-y-0">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-4 text-sm text-slate-500 space-y-2 md:space-y-0">
           <div>Showing 1 to 4 of 247 results</div>
           <div className="flex items-center justify-center space-x-2">
             <button
