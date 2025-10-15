@@ -37,25 +37,26 @@ const cors = require("cors");
 
 const app = express();
 
-// ✅ Middleware
+//  Middleware
 app.use(cors());
 app.use(express.json());
 
-// ✅ Your routes
+//  Your routes
+console.log("Setting up routes...");
 app.use("/analyze-pdf", require("./test")); // PDF analysis route
-
-// ✅ Health check route
+console.log("Setting up routes.2..");
+//  Health check route
 app.get("/health", (req, res) => {
   res.send("✅ PDF Analyzer Backend is running fine.");
 });
 
-// ✅ Export for Vercel (do NOT call app.listen here)
+//  Export for Vercel (do NOT call app.listen here)
 module.exports = app;
 
 // ✅ If running locally (e.g., `node server.js`)
 if (require.main === module) {
   const PORT = process.env.PORT || 5001;
   app.listen(PORT, () => {
-    console.log(`🚀 Server running locally on http://localhost:${PORT}`);
+    console.log(` Server running locally on http://localhost:${PORT}`);
   });
 }
