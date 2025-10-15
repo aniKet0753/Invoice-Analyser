@@ -39,7 +39,7 @@ const app = express();
 
 //  Middleware
 app.use(cors({
-  origin: ['https://reboot-l2g.onrender.com', 'http://localhost:5173','http://localhost:5174'], // both production and local frontend
+  origin: ['https://invoice-analyser-1.onrender.com', 'http://localhost:5173','http://localhost:5174'], // both production and local frontend
   credentials: true,
 }));
 app.use(express.json());
