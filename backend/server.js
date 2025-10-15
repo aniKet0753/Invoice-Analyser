@@ -38,12 +38,15 @@ const cors = require("cors");
 const app = express();
 
 //  Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://reboot-l2g.onrender.com', 'http://localhost:5173','http://localhost:5174'], // both production and local frontend
+  credentials: true,
+}));
 app.use(express.json());
 
 //  Your routes
 console.log("Setting up routes...");
-app.use("/analyze-pdf", require("./test")); // PDF analysis route
+app.use("/analyze-pdf", require("./test"));
 console.log("Setting up routes.2..");
 //  Health check route
 app.get("/health", (req, res) => {

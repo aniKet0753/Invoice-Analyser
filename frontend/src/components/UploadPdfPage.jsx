@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
-const API_BASE_URL ="http://localhost:5001/"
+import axios from "../api";
+
 // import.meta.env.VITE_API_URL ||"";
 
 import { UploadCloud, Loader, Zap, ChevronLeft, ChevronRight, Eye, Plus, CheckCircle, AlertCircle } from "lucide-react";
@@ -71,7 +71,7 @@ export default function PdfAnalyzer() {
     const formData = new FormData();
     formData.append("file", currentFile.fileObj);
 
-    const response = await axios.post(`${API_BASE_URL}analyze-pdf/upload`, formData, {
+    const response = await axios.post(`analyze-pdf/upload`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     console.log("Analysis response:", response.data);
@@ -159,7 +159,7 @@ const handleApprove = async () => {
     console.log("Saving payload to backend:", payload);
 
     // ✅ Save to your backend
-    const response = await axios.post(`${API_BASE_URL}analyze-pdf/save-invoice`, payload, {
+    const response = await axios.post(`analyze-pdf/save-invoice`, payload, {
       headers: { "Content-Type": "application/json" },
     });
 
